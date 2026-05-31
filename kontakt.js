@@ -5,47 +5,55 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (form) {
         form.addEventListener("submit", function (e) {
-            e.preventDefault(); // Ndalon rifreskimin e faqes
+            e.preventDefault(); // Ndalon rifreskimin tradicional të faqes
 
-            // Ndryshojmë butonin për eksperiencë më të mirë vizuale
+            // Ndryshojmë butonin vizualisht për t'i treguar përdoruesit që procesi nisi
             btnDergo.innerText = "Duke u dërguar...";
             btnDergo.disabled = true;
 
             var url = form.getAttribute("action");
+            
+            // Konvertojmë të dhënat e formularit në formatin e pastër JSON që kërkon FormBold
+            var object = {};
             var formData = new FormData(form);
+            formData.forEach(function(value, key){
+                object[key] = value;
+            });
+            var json = JSON.stringify(object);
 
-            // Nisim kërkesën drejt FormBold
+            // Dërgojmë kërkesën AJAX me kokat (headers) e duhura të sigurisve
             fetch(url, {
                 method: "POST",
-                body: formData,
                 headers: {
-                    'Accept': 'application/json'
-                }
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: json
             })
             .then(function (response) {
                 if (response.ok) {
-                    // Shfaqim njoftimin e bukur jeshil të suksesit
+                    // Nëse dërgimi është i suksesshëm, shfaqim njoftimin e bukur jeshil
                     statusDiv.innerHTML = '<div class="alert alert-success">' +
                                           '<strong>Sukses!</strong> Mesazhi juaj u dërgua me sukses te administrata e shkollës.' +
                                           '</div>';
-                    form.reset(); // Pastron kutitë e tekstit
+                    form.reset(); // Pastrojmë të gjitha kutitë e tekstit
                 } else {
-                    throw new Error("Gabim nga serveri");
+                    throw new Error("Gabim nga serveri FormBold");
                 }
             })
             .catch(function (error) {
-                // Nëse ndodh ndonjë problem me rrjetin
+                // Nëse diçka shkon keq, shfaqim mesazhin e kuq të gabimit
                 statusDiv.innerHTML = '<div class="alert alert-danger">' +
                                       '<strong>Gabim!</strong> Ndodhi një problem gjatë dërgimit. Ju lutem provojeni përsëri.' +
                                       '</div>';
-                console.error("Error:", error);
+                console.error("Error gjatë dërgimit:", error);
             })
             .finally(function () {
-                // Kthejmë butonin në gjendje normale
+                // Kthejmë butonin në gjendjen e tij fillestare "Dërgo"
                 btnDergo.innerText = "Dërgo";
                 btnDergo.disabled = false;
 
-                // Fshijmë njoftimin jeshil automatikisht pas 5 sekondave
+                // Fshijmë njoftimin (jeshil ose të kuq) automatikisht pas 5 sekondave
                 setTimeout(function () {
                     statusDiv.innerHTML = "";
                 }, 5000);
