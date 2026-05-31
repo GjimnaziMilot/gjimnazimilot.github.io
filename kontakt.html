@@ -5,10 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kontakt - Gjimnazi Milot</title>
 
-    <!-- Bootstrap CDN -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-    <!-- Skedarët tuaj CSS -->
     <link rel="stylesheet" href="gjimnazimilot.css">
     <link rel="stylesheet" href="kontakt.css">
 </head>
@@ -22,10 +20,7 @@
                 <span class="icon-bar" style="background-color:white;"></span>
                 <span class="icon-bar" style="background-color:white;"></span>
             </button>
-
-            <a class="navbar-brand" href="index.html">
-                Gjimnazi Milot
-            </a>
+            <a class="navbar-brand" href="index.html">Gjimnazi Milot</a>
         </div>
 
         <div class="collapse navbar-collapse" id="myNavbar">
@@ -44,64 +39,38 @@
 
     <h1>Kontakt</h1>
 
-    <!-- Vendi ku do të shfaqet mesazhi i suksesit pas klikimit të butonit -->
     <div id="status"></div>
 
-    <!-- Formulari i lidhur me Google Form -->
-    <form id="contact-form" action="https://docs.google.com/forms/d/e/1FAIpQLScbFnXWAmwIo7lPf-SvwX_fO_sGyMHwOWYmJ-6h1ObLDA7GPw/formResponse" method="POST" target="hidden_iframe" onsubmit="shfaqNjoftimin()">
+    <form id="contact-form" action="https://formbold.com/s/98nbb" method="POST">
 
         <div class="form-group">
             <label for="name">Emri:</label>
-            <input
-                type="text"
-                class="form-control"
-                id="name"
-                name="entry.76593485"
-                required>
+            <input type="text" class="form-control" id="name" name="name" required>
         </div>
 
         <div class="form-group">
             <label for="email">Email:</label>
-            <input
-                type="email"
-                class="form-control"
-                id="email"
-                name="entry.1125227318"
-                required>
+            <input type="email" class="form-control" id="email" name="email" required>
         </div>
 
         <div class="form-group">
             <label for="message">Mesazhi:</label>
-            <textarea
-                class="form-control"
-                id="message"
-                name="entry.1722086930"
-                rows="6"
-                required></textarea>
+            <textarea class="form-control" id="message" name="message" rows="6" required></textarea>
         </div>
 
-        <button type="submit" class="btn btn-primary">
-            Dërgo
-        </button>
+        <button type="submit" class="btn btn-primary" id="btn-dergo">Dërgo</button>
 
     </form>
 
-    <a href="index.html"
-       class="btn btn-danger"
-       style="margin-top:20px;">
-         Kthehu në faqen kryesore
+    <a href="index.html" class="btn btn-danger" style="margin-top:20px;">
+        Kthehu në faqen kryesore
     </a>
 
 </div>
 
-<!-- Iframe-i i fshehur që mundëson dërgimin e të dhënave pa u rifreskuar ose pa lëvizur faqja -->
-<iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
-
-<!-- Libraritë e nevojshme JS -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<!-- Skedari juaj i logjikës -->
 <script src="kontakt.js"></script>
 
 </body>
