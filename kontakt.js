@@ -1,70 +1,34 @@
-// Inicializo EmailJS
-(function () {
-    emailjs.init({
-        publicKey: "07bcM3DkpbMA54nv2"
-    });
-})();
-
-// Prit derisa faqja të ngarkohet
 document.addEventListener("DOMContentLoaded", function () {
+    var form = document.getElementById("contact-form");
+    var statusDiv = document.getElementById("status");
 
-    const form = document.getElementById("contact-form");
-    const status = document.getElementById("status");
+    if (form) {
+        // 1. Krijojmë një iframe të fshehur dinamikisht që faqja të mos rifreskohet ose largohet
+        var iframe = document.createElement("iframe");
+        iframe.name = "hidden_iframe_sub";
+        iframe.id = "hidden_iframe_sub";
+        iframe.style.display = "none";
+        document.body.appendChild(iframe);
 
-    if (!form) {
-        console.error("Formulari contact-form nuk u gjet!");
-        return;
-    }
+        // 2. I tregojmë formularit që të dhënat t'i nisë brenda këtij iframe-i të fshehur
+        form.target = "hidden_iframe_sub";
 
-    form.addEventListener("submit", function (e) {
+        // 3. Çfarë ndodh kur klikohet butoni "Dërgo"
+        form.addEventListener("submit", function () {
+            // Shfaqim njoftimin e bukur të suksesit direkt në faqe me stil Bootstrap
+            statusDiv.innerHTML = '<div class="alert alert-success animate__animated animate__fadeIn">' +
+                                  '<strong>Sukses!</strong> Mesazhi juaj u dërgua me sukses te administrata e shkollës.' +
+                                  '</div>';
 
-        e.preventDefault();
+            // Pastrojmë fushat e formularit pas gjysmë sekonde (pasi të jenë nisur të dhënat)
+            setTimeout(function () {
+                form.reset();
+            }, 500);
 
-        const btn = form.querySelector("button[type='submit']");
-
-        btn.disabled = true;
-        btn.innerText = "Po dërgohet...";
-
-        status.innerHTML = "";
-
-        const params = {
-            from_name: document.getElementById("name").value,
-            from_email: document.getElementById("email").value,
-            message: document.getElementById("message").value
-        };
-
-        emailjs.send(
-            "service_h5g8u7p",
-            "template_7zae227",
-            params
-        )
-        .then(function (response) {
-
-            console.log("SUCCESS!", response.status, response.text);
-
-            status.innerHTML =
-                '<div class="alert alert-success">' +
-                'Mesazhi u dërgua me sukses!' +
-                '</div>';
-
-            form.reset();
-
-            btn.disabled = false;
-            btn.innerText = "Dërgo";
-        })
-        .catch(function (error) {
-
-            console.error("FAILED...", error);
-
-            status.innerHTML =
-                '<div class="alert alert-danger">' +
-                'Gabim gjatë dërgimit të emailit.' +
-                '</div>';
-
-            btn.disabled = false;
-            btn.innerText = "Dërgo";
+            // Largojmë njoftimin automatikisht pas 5 sekondave
+            setTimeout(function () {
+                statusDiv.innerHTML = "";
+            }, 5000);
         });
-
-    });
-
+    }
 });
