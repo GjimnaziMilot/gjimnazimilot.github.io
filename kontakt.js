@@ -4,35 +4,52 @@ document.addEventListener("DOMContentLoaded", function () {
     var btnDergo = document.getElementById("btn-dergo");
 
     if (form) {
-        form.addEventListener("submit", function () {
-            // 1. Ndryshojmë gjendjen e butonit që përdoruesi ta kuptojë që diçka po ndodh
-            if (btnDergo) {
-                btnDergo.innerText = "Duke u dërguar...";
-                btnDergo.disabled = true;
-            }
+        form.addEventListener("submit", function (e) {
+            e.preventDefault(); // Ndalon rifreskimin e faqes
 
-            // 2. Shfaqim njoftimin e bukur jeshil të suksesit sipër formularit
-            if (statusDiv) {
-                statusDiv.innerHTML = '<div class="alert alert-success">' +
-                                      '<strong>Sukses!</strong> Mesazhi juaj u dërgua me sukses te administrata e shkollës.' +
+            // Ndryshojmë butonin për eksperiencë më të mirë vizuale
+            btnDergo.innerText = "Duke u dërguar...";
+            btnDergo.disabled = true;
+
+            var url = form.getAttribute("action");
+            var formData = new FormData(form);
+
+            // Nisim kërkesën drejt FormBold
+            fetch(url, {
+                method: "POST",
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(function (response) {
+                if (response.ok) {
+                    // Shfaqim njoftimin e bukur jeshil të suksesit
+                    statusDiv.innerHTML = '<div class="alert alert-success">' +
+                                          '<strong>Sukses!</strong> Mesazhi juaj u dërgua me sukses te administrata e shkollës.' +
+                                          '</div>';
+                    form.reset(); // Pastron kutitë e tekstit
+                } else {
+                    throw new Error("Gabim nga serveri");
+                }
+            })
+            .catch(function (error) {
+                // Nëse ndodh ndonjë problem me rrjetin
+                statusDiv.innerHTML = '<div class="alert alert-danger">' +
+                                      '<strong>Gabim!</strong> Ndodhi një problem gjatë dërgimit. Ju lutem provojeni përsëri.' +
                                       '</div>';
-            }
+                console.error("Error:", error);
+            })
+            .finally(function () {
+                // Kthejmë butonin në gjendje normale
+                btnDergo.innerText = "Dërgo";
+                btnDergo.disabled = false;
 
-            // 3. Presim gjysmë sekonde (sa të kryhet dërgimi te Google) për të pastruar kutitë dhe kthyer投入 butonin në gjendje normale
-            setTimeout(function () {
-                form.reset();
-                if (btnDergo) {
-                    btnDergo.innerText = "Dërgo";
-                    btnDergo.disabled = false;
-                }
-            }, 500);
-
-            // 4. Fshijmë mesazhin jeshil pas 5 sekondave otomatikisht
-            setTimeout(function () {
-                if (statusDiv) {
+                // Fshijmë njoftimin jeshil automatikisht pas 5 sekondave
+                setTimeout(function () {
                     statusDiv.innerHTML = "";
-                }
-            }, 5000);
+                }, 5000);
+            });
         });
     }
 });
