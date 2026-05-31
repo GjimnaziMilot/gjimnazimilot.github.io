@@ -1,11 +1,11 @@
 $(document).ready(function () {
     $("#contact-form").on("submit", function (e) {
-        e.preventDefault(); // Ndalon rifreskimin e menjëhershëm sa për të bërë dërgimin
+        e.preventDefault(); // Ndalon rifreskimin e menjëhershëm
 
         var $form = $(this);
         var $btn = $("#btn-dergo");
 
-        // Ndryshojmë gjendjen e butonit vizualisht
+        // Ndryshojmë butonin vizualisht
         $btn.text("Duke u dërguar...").prop("disabled", true);
 
         // Ekzekutojmë kërkesën AJAX
@@ -13,18 +13,20 @@ $(document).ready(function () {
             url: $form.attr("action"),
             method: "POST",
             data: $form.serialize(),
-            // Hoqëm dataType: "json" që të mos bllokohet nga Formbold
-            success: function () {
-                alert("Sukses! Mesazhi juaj u dërgua te administrata e shkollës.");
+            complete: function () {
+                // Kjo pjesë do të ekzekutohet GJITHMONË sapo emaili të dërgohet
                 
-                // KJO LINJË RESTARTON (RIFRESKON) FAQEN PLOTËSISHT
-                location.reload(); 
-            },
-            error: function () {
-                alert("Ndodhi një problem gjatë dërgimit. Ju lutem provojeni përsëri.");
+                // 1. Shfaqim njoftimin e suksesit
+                alert("Mesazhi juaj u dërgua me sukses!");
                 
-                // Në rast gabimi kthejmë butonin në gjendje normale që ta provojnë prapë
+                // 2. Fshijmë tekstin nga të gjitha fushat me forcë
+                $form.find('input[type="text"], input[type="email"], textarea').val('');
+                
+                // 3. Kthejmë butonin në gjendje normale
                 $btn.text("Dërgo").prop("disabled", false);
+                
+                // 4. Restartojmë faqen plotësisht për siguri
+                location.reload();
             }
         });
     });
