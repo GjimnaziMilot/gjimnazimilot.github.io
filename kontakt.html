@@ -5,163 +5,79 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kontakt - Gjimnazi Milot</title>
 
-    <!-- Bootstrap -->
-    <link rel="stylesheet"
-    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- Bootstrap CDN -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-    <!-- CSS -->
+    <!-- Skedarët tuaj CSS -->
     <link rel="stylesheet" href="gjimnazimilot.css">
     <link rel="stylesheet" href="kontakt.css">
-
-    <style>
-
-        body{
-            background: #f4f6f9;
-        }
-
-        .seksion-informacion{
-            background: white;
-            padding: 35px;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            margin-bottom: 40px;
-        }
-
-        .seksion-informacion h1{
-            text-align: center;
-            margin-bottom: 30px;
-            color: #003b8e;
-            font-weight: bold;
-        }
-
-        .btn-primary{
-            background: #003b8e;
-            border: none;
-            padding: 10px 25px;
-        }
-
-        .btn-primary:hover{
-            background: #002766;
-        }
-
-        .btn-danger{
-            margin-top: 20px;
-        }
-
-        .success-message{
-            color: green;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-
-        .error-message{
-            color: red;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-
-    </style>
-
 </head>
 <body>
 
-<!-- NAVBAR -->
-
 <nav class="navbar navbar-custom">
     <div class="container">
-
         <div class="navbar-header">
-
-            <button type="button"
-            class="navbar-toggle"
-            data-toggle="collapse"
-            data-target="#myNavbar">
-
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
                 <span class="icon-bar" style="background-color:white;"></span>
                 <span class="icon-bar" style="background-color:white;"></span>
                 <span class="icon-bar" style="background-color:white;"></span>
-
             </button>
 
-            <a class="navbar-brand" href="GjimnaziMilot.html">
+            <a class="navbar-brand" href="index.html">
                 Gjimnazi Milot
             </a>
-
         </div>
 
         <div class="collapse navbar-collapse" id="myNavbar">
-
             <ul class="nav navbar-nav navbar-right">
-
                 <li><a href="njof.html">Njoftime</a></li>
-
-                <li><a href="matura.html">
-                    Matura Shtetërore
-                </a></li>
-
-                <li><a href="Organizimi.html">
-                    Organizimi i Shkollës
-                </a></li>
-
-                <li><a href="aktivitete.html">
-                    Aktivitete
-                </a></li>
-
-                <li class="active">
-                    <a href="kontakt.html">Kontakt</a>
-                </li>
-
+                <li><a href="matura.html">Matura Shtetërore</a></li>
+                <li><a href="Organizimi.html">Organizimi i Shkollës</a></li>
+                <li><a href="aktivitete.html">Aktivitete</a></li>
+                <li class="active"><a href="kontakt.html">Kontakt</a></li>
             </ul>
-
         </div>
-
     </div>
 </nav>
 
-<!-- FORMULARI -->
-
 <div class="container seksion-informacion" style="margin-top:40px;">
 
-    <h1>Na Kontaktoni</h1>
+    <h1>Kontakt</h1>
 
-    <div id="contact-feedback"></div>
+    <!-- Vendi ku do të shfaqet mesazhi i suksesit pas klikimit të butonit -->
+    <div id="status"></div>
 
-    <form id="contact-form">
+    <!-- Formulari i lidhur me Google Form -->
+    <form id="contact-form" action="https://docs.google.com/forms/d/e/1FAIpQLScbFnXWAmwIo7lPf-SvwX_fO_sGyMHwOWYmJ-6h1ObLDA7GPw/formResponse" method="POST" target="hidden_iframe" onsubmit="shfaqNjoftimin()">
 
         <div class="form-group">
-
-            <label>Emri:</label>
-
+            <label for="name">Emri:</label>
             <input
-            type="text"
-            class="form-control"
-            name="name"
-            required>
-
+                type="text"
+                class="form-control"
+                id="name"
+                name="entry.76593485"
+                required>
         </div>
 
         <div class="form-group">
-
-            <label>Email:</label>
-
+            <label for="email">Email:</label>
             <input
-            type="email"
-            class="form-control"
-            name="email"
-            required>
-
+                type="email"
+                class="form-control"
+                id="email"
+                name="entry.1125227318"
+                required>
         </div>
 
         <div class="form-group">
-
-            <label>Mesazhi:</label>
-
+            <label for="message">Mesazhi:</label>
             <textarea
-            class="form-control"
-            name="message"
-            rows="5"
-            required></textarea>
-
+                class="form-control"
+                id="message"
+                name="entry.1722086930"
+                rows="6"
+                required></textarea>
         </div>
 
         <button type="submit" class="btn btn-primary">
@@ -171,65 +87,22 @@
     </form>
 
     <a href="index.html"
-    class="btn btn-danger">
-
-        Kthehu në faqen kryesore
-
+       class="btn btn-danger"
+       style="margin-top:20px;">
+         Kthehu në faqen kryesore
     </a>
 
 </div>
 
-<!-- JQUERY -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- Iframe-i i fshehur që mundëson dërgimin e të dhënave pa u rifreskuar ose pa lëvizur faqja -->
+<iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
 
-<!-- BOOTSTRAP -->
+<!-- Libraritë e nevojshme JS -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<!-- EMAILJS -->
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<!-- Skedari juaj i logjikës -->
+<script src="kontakt.js"></script>
 
-<script>
-
-    // INITIALIZIMI EMAILJS
-
-    (function () {
-
-        emailjs.init("PUBLIC_KEY");
-
-    })();
-
-    // FORMULARI
-
-    document.getElementById("contact-form")
-    .addEventListener("submit", function(e){
-
-        e.preventDefault();
-
-        emailjs.sendForm(
-            "SERVICE_ID",
-            "TEMPLATE_ID",
-            this
-        )
-
-        .then(function(){
-
-            document.getElementById("contact-feedback").innerHTML =
-            "<div class='success-message'>Mesazhi u dërgua me sukses!</div>";
-
-            document.getElementById("contact-form").reset();
-
-        })
-
-        .catch(function(error){
-
-            document.getElementById("contact-feedback").innerHTML =
-            "<div class='error-message'>Gabim gjatë dërgimit!</div>";
-
-        });
-
-    });
-
-</script>
- 
 </body>
 </html>
