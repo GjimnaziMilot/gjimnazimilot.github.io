@@ -1,34 +1,56 @@
 document.addEventListener("DOMContentLoaded", function () {
     var form = document.getElementById("contact-form");
     var statusDiv = document.getElementById("status");
+    var btnDergo = document.getElementById("btn-dergo");
 
     if (form) {
-        // 1. Krijojmë një iframe të fshehur dinamikisht që faqja të mos rifreskohet ose largohet
-        var iframe = document.createElement("iframe");
-        iframe.name = "hidden_iframe_sub";
-        iframe.id = "hidden_iframe_sub";
-        iframe.style.display = "none";
-        document.body.appendChild(iframe);
+        form.addEventListener("submit", function (e) {
+            e.preventDefault(); // Ndalon rifreskimin e faqes
 
-        // 2. I tregojmë formularit që të dhënat t'i nisë brenda këtij iframe-i të fshehur
-        form.target = "hidden_iframe_sub";
+            // Ndryshojmë tekstin e butonit gjatë dërgimit
+            btnDergo.innerText = "Duke u dërguar...";
+            btnDergo.disabled = true;
 
-        // 3. Çfarë ndodh kur klikohet butoni "Dërgo"
-        form.addEventListener("submit", function () {
-            // Shfaqim njoftimin e bukur të suksesit direkt në faqe me stil Bootstrap
-            statusDiv.innerHTML = '<div class="alert alert-success animate__animated animate__fadeIn">' +
-                                  '<strong>Sukses!</strong> Mesazhi juaj u dërgua me sukses te administrata e shkollës.' +
-                                  '</div>';
+            // Linku zyrtar i dërgimit të formularit tuaj Google Form
+            var googleFormUrl = "https://docs.google.com/forms/d/e/1FAIpQLScbFnXWAmwIo7lPf-SvwX_fO_sGyMHwOWYmJ-6h1ObLDA7GPw/formResponse";
 
-            // Pastrojmë fushat e formularit pas gjysmë sekonde (pasi të jenë nisur të dhënat)
-            setTimeout(function () {
-                form.reset();
-            }, 500);
+            // Paketimi i të dhënave me ID-të tuaja të sakta
+            var formData = new FormData();
+            formData.append("entry.76593485", document.getElementById("name").value);     // ID për Emrin
+            formData.append("entry.1125227318", document.getElementById("email").value);  // ID për Email
+            formData.append("entry.1722086930", document.getElementById("message").value); // ID për Mesazhin
 
-            // Largojmë njoftimin automatikisht pas 5 sekondave
-            setTimeout(function () {
-                statusDiv.innerHTML = "";
-            }, 5000);
+            // Dërgimi i të dhënave në prapaskenë (AJAX fetch)
+            fetch(googleFormUrl, {
+                method: "POST",
+                body: formData,
+                mode: "no-cors" // Kjo parandalon bllokimin e sigurisë nga Google
+            })
+            .then(function () {
+                // Shfaqja e njoftimit të suksesit në faqe
+                statusDiv.innerHTML = '<div class="alert alert-success">' +
+                                      '<strong>Sukses!</strong> Mesazhi u dërgua te administrata e shkollës.' +
+                                      '</div>';
+                
+                form.reset(); // Pastron kutitë e tekstit
+            })
+            .catch(function (error) {
+                // Nëse diçka shkon keq me rrjetin
+                statusDiv.innerHTML = '<div class="alert alert-danger">' +
+                                      '<strong>Gabim!</strong> Ndodhi një problem. Ju lutem provojeni përsëri.' +
+                                      '</div>';
+                console.error("Gabim gjatë dërgimit:", error);
+            })
+            .finally(function () {
+                // Kthen投入 butonin në gjendjen normale
+                btnDergo.innerText = "Dërgo";
+                btnDergo.disabled = false;
+
+                // Heq njoftimin pas 5 sekondave
+                setTimeout(function () {
+                    statusDiv.innerHTML = "";
+                }, 5000);
+            });
         });
     }
 });
