@@ -1,33 +1,37 @@
-$(document).ready(function () {
-    $("#contact-form").on("submit", function (e) {
-        e.preventDefault(); // Ndalon rifreskimin e menjëhershëm
+function dergoFormen() {
+    var forma = document.getElementById("contact-form");
+    var butoni = document.getElementById("btn-dergo");
+    var statusi = document.getElementById("status");
 
-        var $form = $(this);
-        var $btn = $("#btn-dergo");
+    // 1. Ndryshojmë tekstin e butonit
+    butoni.innerText = "Duke u dërguar...";
+    butoni.disabled = true;
 
-        // Ndryshojmë butonin vizualisht
-        $btn.text("Duke u dërguar...").prop("disabled", true);
+    // 2. Krijojmë një iframe të fshehur në prapaskenë
+    var iframe = document.createElement("iframe");
+    iframe.name = "iframe-fsheur";
+    iframe.style.display = "none";
+    document.body.appendChild(iframe);
 
-        // Ekzekutojmë kërkesën AJAX
-        $.ajax({
-            url: $form.attr("action"),
-            method: "POST",
-            data: $form.serialize(),
-            complete: function () {
-                // Kjo pjesë do të ekzekutohet GJITHMONË sapo emaili të dërgohet
-                
-                // 1. Shfaqim njoftimin e suksesit
-                alert("Mesazhi juaj u dërgua me sukses!");
-                
-                // 2. Fshijmë tekstin nga të gjitha fushat me forcë
-                $form.find('input[type="text"], input[type="email"], textarea').val('');
-                
-                // 3. Kthejmë butonin në gjendje normale
-                $btn.text("Dërgo").prop("disabled", false);
-                
-                // 4. Restartojmë faqen plotësisht për siguri
-                location.reload();
-            }
-        });
-    });
-});
+    // 3. I themi formës që të dërgohet brenda këtij iframe-i të fshehur
+    forma.target = "iframe-fsheur";
+    
+    // 4. Nisim dërgimin
+    forma.submit();
+
+    // 5. Presim 2 sekonda sa të kryhet dërgimi te Formbold, dhe pastrojmë faqen
+    setTimeout(function() {
+        // Shfaqim njoftimin e suksesit
+        statusi.innerHTML = '<div class="alert alert-success"><strong>Sukses!</strong> Mesazhi u dërgua.</div>';
+        
+        // FSHIJMË TË DHËNAT NGA FUSHAT
+        forma.reset();
+        
+        // Kthejmë butonin në gjendje normale
+        butoni.innerText = "Dërgo";
+        butoni.disabled = false;
+
+        // Heqim iframe-in e fshehur nga memoria
+        document.body.removeChild(iframe);
+    }, 2000);
+}
