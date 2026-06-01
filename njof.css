@@ -1,0 +1,287 @@
+/* =========================
+   STILI I PËRGJITHSHËM
+========================= */
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar.navbar-custom {
+    background-color: #1a2a6c;
+    border: none;
+    border-radius: 0;
+    margin-bottom: 0;
+    padding: 15px 0;
+    position: static;
+    width: 100%;
+}
+
+/* Container */
+
+.navbar-custom .container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 20px;
+    width: 100%;
+}
+
+/* Logo */
+
+.navbar-custom .navbar-brand {
+    color: #ffffff !important;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+/* Linket */
+
+.navbar-custom .navbar-nav > li > a {
+    color: #ffffff !important;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 15px 14px;
+    transition: 0.3s;
+}
+
+/* Hover */
+
+.navbar-custom .navbar-nav > li > a:hover {
+    background-color: #243b55 !important;
+    color: #ffffff !important;
+    border-radius: 4px;
+}
+
+/* Linku aktiv */
+
+.navbar-custom .navbar-nav > .active > a,
+.navbar-custom .navbar-nav > .active > a:hover {
+    background-color: #243b55 !important;
+    color: #ffffff !important;
+    border-radius: 4px;
+}
+
+/* Hamburger menu */
+
+.navbar-custom .navbar-toggle {
+    border: none;
+    background: transparent !important;
+    margin-top: 10px;
+}
+
+.navbar-custom .icon-bar {
+    background-color: #ffffff !important;
+}
+
+/* =========================
+   NJOFTIMET
+========================= */
+
+.main-content {
+    width: 90%;
+    max-width: 1000px;
+    margin: 40px auto;
+}
+
+/* Seksioni */
+
+.njoftime-section {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+}
+
+/* Titulli */
+
+.section-header {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.section-header h2 {
+    font-size: 32px;
+    font-weight: bold;
+    color: #1a2a6c;
+    margin-bottom: 10px;
+}
+
+/* Vija */
+
+.underline {
+    width: 60px;
+    height: 4px;
+    background-color: #ffca28;
+    margin: auto;
+    border-radius: 5px;
+}
+
+/* Container kartash */
+
+.njoftime-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Kartat */
+
+.njoftim-card {
+    display: flex;
+    background-color: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-left: 5px solid #1a2a6c;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: 0.3s;
+}
+
+/* Hover */
+
+.njoftim-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+/* Highlight */
+
+.njoftim-card.highlight {
+    border-left-color: #ffca28;
+}
+
+/* Data */
+
+.njoftim-date {
+    width: 150px;
+    background-color: #f7f7f7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 13px;
+    color: #1a2a6c;
+}
+
+/* Përmbajtja */
+
+.njoftim-content {
+    flex: 1;
+    padding: 25px;
+}
+
+/* Titulli i kartës */
+
+.njoftim-content h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 22px;
+    color: #1a2a6c;
+}
+
+/* Teksti */
+
+.njoftim-content p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #444;
+}
+
+/* Tag */
+
+.tag {
+    display: inline-block;
+    margin-top: 15px;
+    background-color: #e8eaf6;
+    color: #1a2a6c;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer {
+    background-color: #000000;
+    color: #ffffff;
+    text-align: center;
+    padding: 35px 20px;
+    margin-top: 50px;
+}
+
+.footer p {
+    margin: 0 0 10px;
+    font-size: 14px;
+}
+
+.footer a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+.njoftim-content a {
+    text-decoration: none;
+    color: #1a2a6c;
+}
+/* kjo është për ngjyrën e kuqe kur klikojmë mbi të */
+.tag:hover {
+    background-color: red;
+    color: white;
+}
+/*kjo është për të hqur outline-in (vija e zezë border tek kutia viti 
+shkollor-shiko më shumë)*/
+a,
+a:focus,
+a:active {
+    outline: none;
+}
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 768px) {
+
+    .navbar-custom .navbar-brand {
+        font-size: 22px;
+    }
+
+    .navbar-custom .navbar-nav > li > a {
+        font-size: 14px;
+    }
+
+    .section-header h2 {
+        font-size: 26px;
+    }
+
+    .njoftim-card {
+        flex-direction: column;
+    }
+
+    .njoftim-date {
+        width: 100%;
+        border-bottom: 1px solid #e5e5e5;
+    }
+
+    .njoftim-content h3 {
+        font-size: 20px;
+    }
+
+    .njoftim-content p {
+        font-size: 14px;
+    }
+}
