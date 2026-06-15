@@ -9,12 +9,68 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="gjimnazimilot.css">
     <link href="gjimnazimilot.css" rel="stylesheet">
+    
+    <style>
+        /* Ruajmë strukturën dhe heqim hapësirën me navbarin */
+        .hero-section {
+            margin-top: 0px !important; 
+            position: relative;
+            overflow: hidden;
+        }
+
+        .custom-carousel {
+            position: relative;
+            width: 100%;
+        }
+
+        .custom-inner {
+            display: flex;
+            width: 500%; /* 5 foto = 500% */
+        }
+
+        .custom-item {
+            width: 20%; 
+            flex-shrink: 0;
+        }
+
+        .custom-item img {
+            width: 100% !important;
+            height: auto !important;
+            display: block;
+        }
+
+        /* Pikat treguese */
+        .custom-indicators {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            z-index: 15;
+        }
+
+        .custom-indicators li {
+            width: 10px;
+            height: 10px;
+            margin: 5px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            border: 1px solid #fff;
+            transition: background-color 0.3s;
+        }
+
+        .custom-indicators li.active {
+            background-color: #fff;
+        }
+    </style>
 </head>
 <body>
 
-
-
-<nav class="navbar navbar-custom">
+<nav class="navbar navbar-custom" style="margin-bottom: 0px !important;">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -22,7 +78,7 @@
         <span class="icon-bar" style="background-color: white;"></span>
         <span class="icon-bar" style="background-color: white;"></span>                        
       </button>
-      <a class="navbar-brand" href="#">Gjimnazi Milot</a>
+      <a class="navbar-brand" href="index.html">Gjimnazi Milot</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
@@ -30,14 +86,45 @@
         <li><a href="matura.html">Matura Shtetërore</a></li>
         <li><a href="Organizimi.html">Organizimi i shkollës</a></li>
         <li><a href="aktivitete.html">Aktivitete</a></li>
-        <li><a href="kontakt1.html">Kontakt</a></li>
+        <li><a href="kontakt.html">Kontakt</a></li>
       </ul>
     </div>
   </div>
 </nav>
 
+<!-- SEKSIONI I FOTOVE QË LËVIZ VETËM NË NJË DREJTIM -->
 <div class="hero-section">
-  <img src="gjimnazimilotfoto.jpeg" alt="Gjimnazi Milot" class="hero-image">
+  <div class="custom-carousel">
+    
+    <!-- 5 pika -->
+    <ol class="custom-indicators">
+      <li onclick="shkoTeFoto(0)" class="active"></li>
+      <li onclick="shkoTeFoto(1)"></li>
+      <li onclick="shkoTeFoto(2)"></li>
+      <li onclick="shkoTeFoto(3)"></li>
+      <li onclick="shkoTeFoto(4)"></li>
+    </ol>
+
+    <!-- 5 Fotot -->
+    <div class="custom-inner" id="sliderContainer">
+      <div class="custom-item">
+        <img src="gjimnazimilotfoto.jpeg" alt="Gjimnazi Milot 1" class="hero-image">
+      </div>
+      <div class="custom-item">
+        <img src="ballina1.jpg" alt="Gjimnazi Milot 2" class="hero-image">
+      </div>
+      <div class="custom-item">
+        <img src="ballina2.jpg" alt="Gjimnazi Milot 3" class="hero-image">
+      </div>
+      <div class="custom-item">
+        <img src="ballina4.jpg" alt="Gjimnazi Milot 4" class="hero-image">
+      </div>
+      <div class="custom-item">
+        <img src="ballina5.jpg" alt="Gjimnazi Milot 5" class="hero-image">
+      </div>
+    </div>
+
+  </div>
 </div>
 
 <div class="container seksion-informacion">
@@ -53,9 +140,8 @@ Viti mësimor 1987-1988 shënon dhe fillimin e arsimit të mesëm të përgjiths
       <div class="panel-lajme">
         <h4>Aktivitetet e Fundit</h4>
         <ul>
-            <li> <a href = "https://www.facebook.com/share/v/1EeQAMbDvd/"> Festivali i Shkencave</a></li>
-            <li><a href= "olimpiada.html">Olimpiadat</a></li>
-            
+            <li>Festivali i Shkencave</li>
+            <li>Olimpiadat</li>
         </ul>
       </div>
     </div>
@@ -64,13 +150,60 @@ Viti mësimor 1987-1988 shënon dhe fillimin e arsimit të mesëm të përgjiths
 
 <footer class="footer-serioz text-center">
   <p>2026 Gjimnazi Milot. Të gjitha të drejtat e rezervuara.</p>
-
  <a href="mailto:milotgjimnazi@yahoo.com">Email: milotgjimnazi@yahoo.com</a>
 </footer>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- KODI QË SIGURON LËVIZJEN VETËM PËRPARA -->
+<script>
+  let indeksiAktual = 0;
+  const totaliImazheve = 5;
+  const container = document.getElementById('sliderContainer');
+  const pikat = document.querySelectorAll('.custom-indicators li');
 
+  function rrethekoFoton(meAnimacion = true) {
+    if (meAnimacion) {
+      container.style.transition = "transform 0.5s ease-in-out";
+    } else {
+      container.style.transition = "none";
+    }
+    container.style.transform = `translateX(-${indeksiAktual * 20}%)`;
+    
+    // Përditëso pikat poshtë
+    pikat.forEach((pika, i) => {
+      if(i === indeksiAktual % totaliImazheve) {
+        pika.classList.add('active');
+      } else {
+        pika.classList.remove('active');
+      }
+    });
+  }
+
+  function levizAutomatikisht() {
+    indeksiAktual++;
+    
+    if (indeksiAktual >= totaliImazheve) {
+      // Kur shkon te fundit, kthehet te e para menjëherë pa bërë rrëshqitje mbrapsht
+      indeksiAktual = 0;
+      rrethekoFoton(false); // Ndryshim i prerë pa animacion kthimi
+      
+      // Një vonesë e vogël që të fillojë lëvizja e re përpara normalisht
+      setTimeout(() => {
+        indeksiAktual = 1;
+        rrethekoFoton(true);
+      }, 50);
+    } else {
+      rrethekoFoton(true);
+    }
+  }
+
+  function shkoTeFoto(nr) {
+    indeksiAktual = nr;
+    rrethekoFoton(true);
+  }
+
+  // Zhvendosja bëhet përpara çdo 3 sekonda
+  setInterval(levizAutomatikisht, 3000);
+</script>
 
 </body>
 </html>
