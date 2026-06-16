@@ -33,19 +33,27 @@
             display: flex;
             width: 800%; /* 7 foto reale + 1 kopje = 800% */
             transition: transform 0.6s ease-in-out; 
+            align-items: stretch; /* Detyron të gjithë artikujt të kenë të njëjtën lartësi */
         }
 
         .carousel-custom-item {
             width: 12.5%; /* Ndarja ekzakte (100 / 8) */
             flex-shrink: 0;
+            display: flex;
         }
 
-        /* MBUSHJA E PLOTË E EKRANIT PA LINJA ANASH */
+        /* MBUSHJA E PLOTË E EKRANIT - MADHËSIA SA FOTOJA E PARË */
         .carousel-custom-item img {
             width: 100% !important;
-            height: 550px !important; /* Lartësia e karuselit për kompjuter siç ishte */
-            object-fit: cover; /* Detyron foton të mbushë të gjithë hapësirën pa lënë vija gri */
+            height: auto !important; /* Lartësia përshtatet automatikisht */
+            object-fit: cover; /* Fotot e tjera mbushin hapësirën pa u shtrembëruar */
             display: block;
+        }
+
+        /* Fotoja e parë (dhe kopja e saj në fund) nuk pritet dhe vendos lartësinë e slider-it */
+        .carousel-custom-inner .carousel-custom-item:first-child img,
+        .carousel-custom-inner .carousel-custom-item:last-child img {
+            object-fit: cover !important; /* Bëhet cover sipas kërkesës tënde */
         }
 
         /* Pikat treguese fiks pranë fotos */
@@ -104,13 +112,6 @@
 
         .btn-next {
             right: 15px;
-        }
-
-        /* Ndryshimi i lartësisë për celularë që të duket bukur */
-        @media (max-width: 767px) {
-            .carousel-custom-item img {
-                height: 300px !important; /* Lartësia e përshtatshme për celular siç ishte */
-            }
         }
     </style>
 </head>
