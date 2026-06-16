@@ -36,16 +36,17 @@
             flex-shrink: 0;
         }
 
+        /* RREGULLIMI I RI: FOTOT NUK PRITEN DHE RUHEN ASHTU SIÇ JANË */
         .carousel-custom-item img {
             width: 100% !important;
-            height: auto !important;
+            height: auto !important; /* Lartësia ndryshon automatikisht pa prerje */
             display: block;
         }
 
-        /* Pikat treguese poshtë fotove */
+        /* Pikat treguese fiks në skajin e poshtëm të fotos */
         .custom-indicators {
             position: absolute;
-            bottom: 15px;
+            bottom: 5px; 
             left: 50%;
             transform: translateX(-50%);
             display: flex;
@@ -70,7 +71,7 @@
             background-color: #fff;
         }
 
-        /* STILI I BUTONAVE ANËSORË */
+        /* Butonat anësorë */
         .carousel-btn {
             position: absolute;
             top: 50%;
@@ -141,7 +142,7 @@
       <li onclick="shkoTeFoto(4)"></li>
     </ol>
 
-    <!-- Shiriti i fotove -->
+    <!-- Shiriti i fotove origjinale -->
     <div class="carousel-custom-inner" id="sliderTrack">
       <div class="carousel-custom-item">
         <img src="gjimnazimilotfoto.jpeg" alt="Gjimnazi Milot 1" class="hero-image">
@@ -158,7 +159,7 @@
       <div class="carousel-custom-item">
         <img src="ballina5.jpg" alt="Gjimnazi Milot 5" class="hero-image">
       </div>
-      <!-- FOTOJA KOPJE (për lëvizjen e pafundme drejt) -->
+      <!-- FOTOJA KOPJE -->
       <div class="carousel-custom-item">
         <img src="gjimnazimilotfoto.jpeg" alt="Gjimnazi Milot 1" class="hero-image">
       </div>
@@ -193,7 +194,6 @@ Viti mësimor 1987-1988 shënon dhe fillimin e arsimit të mesëm të përgjiths
  <a href="mailto:milotgjimnazi@yahoo.com">Email: milotgjimnazi@yahoo.com</a>
 </footer>
 
-<!-- SCRIPT-I I INTEGRUAR ME BUTONAT -->
 <script>
   let indeksiAktual = 0;
   const fototReale = 5;
@@ -204,7 +204,6 @@ Viti mësimor 1987-1988 shënon dhe fillimin e arsimit të mesëm të përgjiths
   function rrethekoKaruselin() {
     track.style.transform = `translateX(-${indeksiAktual * 16.6666}%)`;
     
-    // Rregullimi i pikave aktive
     pikat.forEach((pika, i) => {
       if(i === (indeksiAktual % fototReale)) {
         pika.classList.add('active');
@@ -228,20 +227,17 @@ Viti mësimor 1987-1988 shënon dhe fillimin e arsimit të mesëm të përgjiths
     }
   }
 
-  // Funksioni kur klikohet butoni Djathtas
   function butoniDjathtas() {
-    clearInterval(intervali); // Ndalon kohën automatike për momentin
+    clearInterval(intervali);
     levizAutomatikisht();
-    intervali = setInterval(levizAutomatikisht, kohezgjatja); // E rinis përsëri
+    intervali = setInterval(levizAutomatikisht, kohezgjatja);
   }
 
-  // Funksioni kur klikohet butoni Majtas
   function butoniMajtas() {
     clearInterval(intervali);
     track.style.transition = "transform 0.6s ease-in-out";
     
     if (indeksiAktual === 0) {
-      // Nëse jemi te e para, shkojmë te kopja në fund pa u parë, pastaj rrëshqasim te fotoja 5
       track.style.transition = "none";
       indeksiAktual = fototReale;
       rrethekoKaruselin();
@@ -266,7 +262,6 @@ Viti mësimor 1987-1988 shënon dhe fillimin e arsimit të mesëm të përgjiths
     intervali = setInterval(levizAutomatikisht, kohezgjatja);
   }
 
-  // Nisja e lëvizjes automatike çdo 3 sekonda
   let intervali = setInterval(levizAutomatikisht, kohezgjatja);
 </script>
 
