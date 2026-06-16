@@ -11,12 +11,16 @@
     <link href="gjimnazimilot.css" rel="stylesheet">
     
     <style>
-        /* Heq hapësirën me navbarin */
+        /* Seksioni Hero - Shtrirje totale në të gjithë ekranin */
         .hero-section {
             margin-top: 0px !important; 
             overflow: hidden;
-            width: 100%;
+            width: 100vw; /* Merr tërë gjerësinë e ekranit */
             position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
         }
 
         .carousel-custom-container {
@@ -27,26 +31,27 @@
 
         .carousel-custom-inner {
             display: flex;
-            width: 600%; /* 5 foto reale + 1 kopje = 600% */
+            width: 800%; /* 7 foto reale + 1 kopje = 800% */
             transition: transform 0.6s ease-in-out; 
         }
 
         .carousel-custom-item {
-            width: 16.6666%; /* Ndarja ekzakte (100 / 6) */
+            width: 12.5%; /* Ndarja ekzakte (100 / 8) */
             flex-shrink: 0;
         }
 
-        /* Fotot ruajnë madhësinë origjinale pa u prerë */
+        /* MBUSHJA E PLOTË E EKRANIT PA LINJA ANASH */
         .carousel-custom-item img {
             width: 100% !important;
-            height: auto !important; 
+            height: 550px !important; /* Lartësia e karuselit për kompjuter siç ishte */
+            object-fit: cover; /* Detyron foton të mbushë të gjithë hapësirën pa lënë vija gri */
             display: block;
         }
 
-        /* Pikat treguese fiks në skajin e poshtëm të fotos */
+        /* Pikat treguese fiks pranë fotos */
         .custom-indicators {
             position: absolute;
-            bottom: 5px; 
+            bottom: 15px; 
             left: 50%;
             transform: translateX(-50%);
             display: flex;
@@ -101,15 +106,11 @@
             right: 15px;
         }
 
-        /* Siguron që butoni hamburger të jetë i dukshëm në celular */
-        .navbar-toggle .icon-bar {
-            background-color: #fff !important;
-        }
-        .navbar-toggle {
-            border-color: rgba(255, 255, 255, 0.3) !important;
-        }
-        .navbar-toggle:hover, .navbar-toggle:focus {
-            background-color: rgba(255, 255, 255, 0.2) !important;
+        /* Ndryshimi i lartësisë për celularë që të duket bukur */
+        @media (max-width: 767px) {
+            .carousel-custom-item img {
+                height: 300px !important; /* Lartësia e përshtatshme për celular siç ishte */
+            }
         }
     </style>
 </head>
@@ -118,13 +119,12 @@
 <nav class="navbar navbar-custom" style="margin-bottom: 0px !important;">
   <div class="container">
     <div class="navbar-header">
-      <!-- Butoni Hamburger -->
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#myNavbar" aria-expanded="false">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand" href="index.html">Gjimnazi Milot</a>
+      <a class="navbar-brand" href="#">Gjimnazi Milot</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
@@ -141,39 +141,43 @@
 <div class="hero-section">
   <div class="carousel-custom-container">
     
-    <!-- Butonat Anësorë -->
     <button class="carousel-btn btn-prev" onclick="butoniMajtas()">&#10094;</button>
     <button class="carousel-btn btn-next" onclick="butoniDjathtas()">&#10095;</button>
     
-    <!-- 5 pikat treguese -->
     <ol class="custom-indicators">
       <li onclick="shkoTeFoto(0)" class="active"></li>
       <li onclick="shkoTeFoto(1)"></li>
       <li onclick="shkoTeFoto(2)"></li>
       <li onclick="shkoTeFoto(3)"></li>
       <li onclick="shkoTeFoto(4)"></li>
+      <li onclick="shkoTeFoto(5)"></li>
+      <li onclick="shkoTeFoto(6)"></li>
     </ol>
 
-    <!-- Shiriti i fotove -->
     <div class="carousel-custom-inner" id="sliderTrack">
       <div class="carousel-custom-item">
-        <img src="gjimnazimilotfoto.jpeg" alt="Gjimnazi Milot 1" class="hero-image">
+        <img src="gjimnazimilotfoto.jpeg" alt="Gjimnazi Milot 1">
       </div>
       <div class="carousel-custom-item">
-        <img src="ballina1.jpg" alt="Gjimnazi Milot 2" class="hero-image">
+        <img src="pic1.jpeg" alt="Gjimnazi Milot 2">
       </div>
       <div class="carousel-custom-item">
-        <img src="ballina2.jpg" alt="Gjimnazi Milot 3" class="hero-image">
+        <img src="pic3.jpeg" alt="Gjimnazi Milot 3">
       </div>
       <div class="carousel-custom-item">
-        <img src="ballina4.jpg" alt="Gjimnazi Milot 4" class="hero-image">
+        <img src="pic4.jpeg" alt="Gjimnazi Milot 4">
       </div>
       <div class="carousel-custom-item">
-        <img src="ballina5.jpg" alt="Gjimnazi Milot 5" class="hero-image">
+        <img src="pic5.jpeg" alt="Gjimnazi Milot 5">
       </div>
-      <!-- FOTOJA KOPJE -->
       <div class="carousel-custom-item">
-        <img src="gjimnazimilotfoto.jpeg" alt="Gjimnazi Milot 1" class="hero-image">
+        <img src="pic6.jpeg" alt="Gjimnazi Milot 6">
+      </div>
+      <div class="carousel-custom-item">
+        <img src="pic7.jpeg" alt="Gjimnazi Milot 7">
+      </div>
+      <div class="carousel-custom-item">
+        <img src="gjimnazimilotfoto.jpeg" alt="Gjimnazi Milot 1">
       </div>
     </div>
 
@@ -193,7 +197,7 @@ Viti mësimor 1987-1988 shënon dhe fillimin e arsimit të mesëm të përgjiths
       <div class="panel-lajme">
         <h4>Aktivitetet e Fundit</h4>
         <ul>
-            <li>a href="Festivali i Shkencave</li>
+            <li><a href="https://www.facebook.com/share/v/1GncvenXGU/" target="_blank">Festivali i Shkencave</a></li>
             <li><a href="olimpiada.html">Olimpiadat</a></li>
         </ul>
       </div>
@@ -206,20 +210,18 @@ Viti mësimor 1987-1988 shënon dhe fillimin e arsimit të mesëm të përgjiths
  <a href="mailto:milotgjimnazi@yahoo.com">Email: milotgjimnazi@yahoo.com</a>
 </footer>
 
-<!-- 1. LIBRARITË E BOOTSTRAP PËR MENUNË HAMBURGER (Të domosdoshme që të funksionojë) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<!-- 2. SCRIPT-I LOKAL I KARUSELIT -->
 <script>
   let indeksiAktual = 0;
-  const fototReale = 5;
+  const fototReale = 7; 
   const track = document.getElementById('sliderTrack');
   const pikat = document.querySelectorAll('.custom-indicators li');
   let kohezgjatja = 3000;
 
   function rrethekoKaruselin() {
-    track.style.transform = `translateX(-${indeksiAktual * 16.6666}%)`;
+    track.style.transform = `translateX(-${indeksiAktual * 12.5}%)`;
     
     pikat.forEach((pika, i) => {
       if(i === (indeksiAktual % fototReale)) {
