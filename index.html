@@ -36,10 +36,10 @@
             flex-shrink: 0;
         }
 
-        /* RREGULLIMI I RI: FOTOT NUK PRITEN DHE RUHEN ASHTU SIÇ JANË */
+        /* Fotot ruajnë madhësinë origjinale pa u prerë */
         .carousel-custom-item img {
             width: 100% !important;
-            height: auto !important; /* Lartësia ndryshon automatikisht pa prerje */
+            height: auto !important; 
             display: block;
         }
 
@@ -100,6 +100,17 @@
         .btn-next {
             right: 15px;
         }
+
+        /* Siguron që butoni hamburger të jetë i dukshëm në celular */
+        .navbar-toggle .icon-bar {
+            background-color: #fff !important;
+        }
+        .navbar-toggle {
+            border-color: rgba(255, 255, 255, 0.3) !important;
+        }
+        .navbar-toggle:hover, .navbar-toggle:focus {
+            background-color: rgba(255, 255, 255, 0.2) !important;
+        }
     </style>
 </head>
 <body>
@@ -107,10 +118,11 @@
 <nav class="navbar navbar-custom" style="margin-bottom: 0px !important;">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar" style="background-color: white;"></span>
-        <span class="icon-bar" style="background-color: white;"></span>
-        <span class="icon-bar" style="background-color: white;"></span>                        
+      <!-- Butoni Hamburger -->
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#myNavbar" aria-expanded="false">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
       </button>
       <a class="navbar-brand" href="index.html">Gjimnazi Milot</a>
     </div>
@@ -142,7 +154,7 @@
       <li onclick="shkoTeFoto(4)"></li>
     </ol>
 
-    <!-- Shiriti i fotove origjinale -->
+    <!-- Shiriti i fotove -->
     <div class="carousel-custom-inner" id="sliderTrack">
       <div class="carousel-custom-item">
         <img src="gjimnazimilotfoto.jpeg" alt="Gjimnazi Milot 1" class="hero-image">
@@ -194,6 +206,11 @@ Viti mësimor 1987-1988 shënon dhe fillimin e arsimit të mesëm të përgjiths
  <a href="mailto:milotgjimnazi@yahoo.com">Email: milotgjimnazi@yahoo.com</a>
 </footer>
 
+<!-- 1. LIBRARITË E BOOTSTRAP PËR MENUNË HAMBURGER (Të domosdoshme që të funksionojë) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<!-- 2. SCRIPT-I LOKAL I KARUSELIT -->
 <script>
   let indeksiAktual = 0;
   const fototReale = 5;
