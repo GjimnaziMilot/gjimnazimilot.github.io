@@ -7,58 +7,11 @@
 
     <link class="jsbin" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     
-    <!-- Lidhja me skedarin tënd CSS -->
-    <link rel="stylesheet" href="njof.css">
+    <link rel="stylesheet" href="njoftfb.css">
 
     <style>
         /* ========================================================= */
-        /* STILIMI PËR CAROUSEL-IN E FACEBOOK (VETËM ME PIKA)        */
-        /* ========================================================= */
-        .fb-carousel-container {
-            max-width: 1000px; 
-            margin: 0 auto;
-            padding: 0; 
-            position: relative;
-        }
-
-        .juicer-iframe-wrapper {
-            position: relative; /* Nevojitet për shtresën e padukshme */
-        }
-
-        .juicer-iframe-wrapper iframe {
-            width: 100%;
-            height: 600px; 
-            border: 1px solid #eee;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            background: #fff;
-        }
-
-        /* TRUKU: Shtresa e padukshme që kap prekjen në celular */
-        .fb-touch-overlay {
-            display: none;
-        }
-
-        /* Pikat treguese poshtë (Indicators) */
-        .fb-carousel-container .carousel-indicators {
-            bottom: -35px;
-        }
-        .fb-carousel-container .carousel-indicators li {
-            border: 2px solid #1a2a6c;
-            width: 12px;
-            height: 12px;
-            margin: 0 5px;
-            cursor: pointer;
-        }
-        .fb-carousel-container .carousel-indicators .active {
-            width: 12px;
-            height: 12px;
-            margin: 0 5px;
-            background-color: #1a2a6c;
-        }
-
-        /* ========================================================= */
-        /* 2. SHIRITI LËVIZËS ME STILIN TËND TË KARTAVE              */
+        /* SHIRITI LËVIZËS ME STILIN TËND TË KARTAVE                 */
         /* ========================================================= */
         .shirit-njoftime-kontainer-madh {
             width: 100%;
@@ -142,31 +95,24 @@
         }
 
         /* ========================================================= */
-        /* 3. PËRSHTATJA PËR CELULAR (RESPONSIVE)                    */
+        /* RREGULLIMI I FACEBOOK IFRAME PËR CELULAR                  */
+        /* ========================================================= */
+        .fb-fixed-wrapper {
+            width: 100%;
+            max-width: 500px; /* E mban deri në 500px në ekrane të mëdha */
+            margin: 0 auto; /* E qendron në mes */
+            overflow: hidden;
+        }
+
+        .fb-fixed-wrapper iframe {
+            width: 100% !important;
+            max-width: 100%;
+        }
+
+        /* ========================================================= */
+        /* PËRSHTATJA PËR CELULAR (RESPONSIVE)                       */
         /* ========================================================= */
         @media (max-width: 767px) {
-            .fb-carousel-container {
-                max-width: 100%;
-                padding: 0 5px !important; 
-            }
-
-            .juicer-iframe-wrapper iframe {
-                height: 500px; 
-                border-radius: 4px;
-            }
-
-            /* Aktivizojmë shtresën e padukshme vetëm në celular */
-            .fb-touch-overlay {
-                display: block;
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                z-index: 10;
-                background: transparent;
-            }
-
             .njoftim-card {
                 width: 300px;
                 margin: 0 10px;
@@ -184,7 +130,6 @@
 
 <body>
 
-    <!-- Navbar -->
     <nav class="navbar navbar-custom">
         <div class="container">
             <div class="navbar-header">
@@ -215,9 +160,6 @@
                 <div class="underline"></div>
             </div>
 
-            <!-- ========================================================= -->
-            <!-- 1. CAROUSEL AUTOMATIK (VETËM ME PIKA POSHTË)               -->
-            <!-- ========================================================= -->
             <div class="row" style="margin-bottom: 75px;">
                 <div class="col-xs-12">
                     
@@ -226,41 +168,57 @@
                     </div>
 
                     <div class="fb-carousel-container">
-                        <div id="facebookJuicerCarousel" class="carousel slide" data-ride="carousel" data-interval="3000">
+                        <div id="facebookInstitucioneCarousel" class="carousel slide" data-ride="carousel" data-interval="3000">
                             
-                            <!-- 2 Pikat treguese poshtë -->
                             <ol class="carousel-indicators">
-                                <li data-target="#facebookJuicerCarousel" data-slide-to="0" class="active"></li>
-                                <li data-target="#facebookJuicerCarousel" data-slide-to="1"></li>
+                                <li data-target="#facebookInstitucioneCarousel" data-slide-to="0" class="active"></li>
+                                <li data-target="#facebookInstitucioneCarousel" data-slide-to="1"></li>
+                                <li data-target="#facebookInstitucioneCarousel" data-slide-to="2"></li>
                             </ol>
 
-                            <!-- Sllajdet (Iframes) -->
                             <div class="carousel-inner" role="listbox">
                                 
-                                <!-- Sllajdi 1: Arsimi Parauniversitar -->
                                 <div class="item active">
-                                    <div class="text-center" style="font-weight: bold; margin-bottom: 10px; color: #555;">Burimi: AKAP dhe ZVAP Kurbin</div>
-                                    <div class="juicer-iframe-wrapper">
-                                        <!-- Shtresa e padukshme për klikimin e parë -->
-                                        <div class="fb-touch-overlay"></div>
-                                        <iframe 
-                                            src="https://www.juicer.io/api/feeds/arsimiparauniversitar/iframe" 
-                                            frameborder="0" 
-                                            title="arsimiparauniversitar - Juicer social media feed">
+                                    <div class="text-center" style="font-weight: bold; margin-bottom: 10px; color: #555;">Burimi: ZVAP Kurbin</div>
+                                    <div class="fb-fixed-wrapper">
+                                        <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fprofile.php%3Fid%3D100064178460927&tabs=timeline&width=500&height=600&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false&appId" 
+                                                width="500" 
+                                                height="600" 
+                                                style="border:none;overflow:hidden" 
+                                                scrolling="no" 
+                                                frameborder="0" 
+                                                allowfullscreen="true" 
+                                                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
                                         </iframe>
                                     </div>
                                 </div>
 
-                                <!-- Sllajdi 2: ASCAP 2020 -->
                                 <div class="item">
-                                    <div class="text-center" style="font-weight: bold; margin-bottom: 10px; color: #555;">Burimi: ASCAP </div>
-                                    <div class="juicer-iframe-wrapper">
-                                        <!-- Shtresa e padukshme për klikimin e parë -->
-                                        <div class="fb-touch-overlay"></div>
-                                        <iframe 
-                                            src="https://www.juicer.io/api/feeds/ascap2020/iframe" 
-                                            frameborder="0" 
-                                            title="ASCAP2020 - Juicer social media feed">
+                                    <div class="text-center" style="font-weight: bold; margin-bottom: 10px; color: #555;">Burimi: ASCAP</div>
+                                    <div class="fb-fixed-wrapper">
+                                        <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FASCAP2020&tabs=timeline&width=500&height=600&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false&appId" 
+                                                width="500" 
+                                                height="600" 
+                                                style="border:none;overflow:hidden" 
+                                                scrolling="no" 
+                                                frameborder="0" 
+                                                allowfullscreen="true" 
+                                                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+                                        </iframe>
+                                    </div>
+                                </div>
+
+                                <div class="item">
+                                    <div class="text-center" style="font-weight: bold; margin-bottom: 10px; color: #555;">Burimi: AKAP</div>
+                                    <div class="fb-fixed-wrapper">
+                                        <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Farsimiparauniversitar&tabs=timeline&width=500&height=600&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false&appId" 
+                                                width="500" 
+                                                height="600" 
+                                                style="border:none;overflow:hidden" 
+                                                scrolling="no" 
+                                                frameborder="0" 
+                                                allowfullscreen="true" 
+                                                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
                                         </iframe>
                                     </div>
                                 </div>
@@ -273,10 +231,6 @@
                 </div>
             </div>
 
-
-            <!-- ========================================================= -->
-            <!-- 2. SHIRITI LËVIZËS I NJOFTIMEVE                            -->
-            <!-- ========================================================= -->
             <div class="row">
                 <div class="col-xs-12">
                     
@@ -288,7 +242,6 @@
                         <div class="shirit-njoftime-wrapper">
                             <div class="shirit-njoftime-track">
                                 
-                                <!-- SETI 1 -->
                                 <article class="njoftim-card">
                                     <div class="njoftim-date">12 Maj 2026</div> 
                                     <div class="njoftim-content">
@@ -316,7 +269,6 @@
                                     </div>
                                 </article>
 
-                                <!-- SETI 2 -->
                                 <article class="njoftim-card">
                                     <div class="njoftim-date">12 Maj 2026</div> 
                                     <div class="njoftim-content">
@@ -362,31 +314,17 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <!-- ZGJIHDJA E RE ME SHTRESË TË PADUKSHME -->
     <script>
         $(document).ready(function() {
-            var dynamicCarousel = $('#facebookJuicerCarousel');
+            var dynamicCarousel = $('#facebookInstitucioneCarousel');
 
-            // Kur preket shtresa e padukshme në celular
-            $('.fb-touch-overlay').on('touchstart click', function(e) {
-                e.preventDefault(); // Ndalo klikimin e parë të shkojë te iframe direkt
-                
-                dynamicCarousel.carousel('pause'); // Ndalo automatikun menjëherë!
-                
-                $('.fb-touch-overlay').hide(); // Zhduk shtresën e padukshme që përdoruesi të shfletojë lajmet lirisht
-
-                // Pas 8 sekondash pa ndërveprim, rinis Carousel-in dhe kthe shtresën
-                setTimeout(function() {
-                    if ($('.fb-touch-overlay').is(':hidden')) {
-                        $('.fb-touch-overlay').show();
-                        dynamicCarousel.carousel('cycle');
-                    }
-                }, 8000); 
+            dynamicCarousel.carousel({
+                interval: 3000,
+                pause: "hover"
             });
 
-            // Nëse ndryshohet sllajdi nga pikat në fund, kthe shtresën e padukshme përsëri
-            dynamicCarousel.on('slide.bs.carousel', function () {
-                $('.fb-touch-overlay').show();
+            $('.fb-fixed-wrapper').on('touchstart click', function() {
+                dynamicCarousel.carousel('pause');
             });
         });
     </script>
