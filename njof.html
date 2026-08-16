@@ -222,9 +222,14 @@
         .footer a:hover {
             text-decoration: underline;
         }
+        
         .njoftim-content a {
+            display: inline-block;
+            position: relative;
+            z-index: 10;
             text-decoration: none;
             color: #1a2a6c;
+            -webkit-tap-highlight-color: rgba(0,0,0,0.1);
         }
 
         /* kjo është për ngjyrën e kuqe kur klikojmë mbi të */
@@ -233,8 +238,7 @@
             color: white;
         }
 
-        /*kjo është për të hequr outline-in (vija e zezë border tek kutia viti 
-        shkollor-shiko më shumë)*/
+        /*kjo është për të hequr outline-in*/
         a,
         a:focus,
         a:active {
@@ -307,13 +311,16 @@
             gap: 20px; /* Hapësira mes kartave në lëvizje */
         }
 
+        /* Ndalohet animacioni kur preket në celular ose hover në kompjuter */
         .shirit-njoftime-wrapper:hover .shirit-njoftime-track,
-        .shirit-njoftime-wrapper:active .shirit-njoftime-track {
+        .shirit-njoftime-wrapper:active .shirit-njoftime-track,
+        .shirit-njoftime-track:hover,
+        .shirit-njoftime-track:active {
             animation-play-state: paused !important;
             -webkit-animation-play-state: paused !important;
         }
 
-        /* Përshtatja e gjerësisë së kartës TËNDE kur ndodhet brenda shiritit lëvizës */
+        /* Përshtatja e gjerësisë së kartës kur ndodhet brenda shiritit lëvizës */
         .shirit-njoftime-track .njoftim-card {
             width: 550px; 
             flex-shrink: 0;
@@ -376,62 +383,59 @@
                                 <li data-target="#facebookInstitucioneCarousel" data-slide-to="0" class="active" style="border-color: #1a2a6c;"></li>
                                 <li data-target="#facebookInstitucioneCarousel" data-slide-to="1" style="border-color: #1a2a6c;"></li>
                                 <li data-target="#facebookInstitucioneCarousel" data-slide-to="2" style="border-color: #1a2a6c;"></li>
-                              
                             </ol>
 
                             <div class="carousel-inner" role="listbox">
                                 
-                           
-  <div class="item active">
-                                    <div class="text-center" style="font-weight: bold; margin-bottom: 10px; color: #555;">Burimi: ZVAP Kurbin</div>
-                                    <div class="fb-fixed-wrapper">
-                                        <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fprofile.php%3Fid%3D100064178460927&tabs=timeline&width=340&height=600&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false" 
-                                                width="350" 
-                                                height="600" 
-                                                style="border:none;overflow:hidden" 
-                                                scrolling="no" 
-                                                frameborder="0" 
-                                                allowfullscreen="true" 
-                                                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
-                                        </iframe>
-                                    </div>
-                                </div>
+                                <div class="item active">
+                                    <div class="text-center" style="font-weight: bold; margin-bottom: 10px; color: #555;">Burimi: ZVAP Kurbin</div>
+                                    <div class="fb-fixed-wrapper">
+                                        <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fprofile.php%3Fid%3D100064178460927&tabs=timeline&width=340&height=600&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false" 
+                                                width="350" 
+                                                height="600" 
+                                                style="border:none;overflow:hidden" 
+                                                scrolling="no" 
+                                                frameborder="0" 
+                                                allowfullscreen="true" 
+                                                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+                                        </iframe>
+                                    </div>
+                                </div>
 
-                                <div class="item">
-                                    <div class="text-center" style="font-weight: bold; margin-bottom: 10px; color: #555;">Burimi: ASCAP</div>
-                                    <div class="fb-fixed-wrapper">
-                                        <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FASCAP2020&tabs=timeline&width=340&height=600&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false&appId" 
-                                                width="350" 
-                                                height="600" 
-                                                style="border:none;overflow:hidden" 
-                                                scrolling="no" 
-                                                frameborder="0" 
-                                                allowfullscreen="true" 
-                                                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
-                                        </iframe>
-                                    </div>
-                                </div>
+                                <div class="item">
+                                    <div class="text-center" style="font-weight: bold; margin-bottom: 10px; color: #555;">Burimi: ASCAP</div>
+                                    <div class="fb-fixed-wrapper">
+                                        <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FASCAP2020&tabs=timeline&width=340&height=600&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false&appId" 
+                                                width="350" 
+                                                height="600" 
+                                                style="border:none;overflow:hidden" 
+                                                scrolling="no" 
+                                                frameborder="0" 
+                                                allowfullscreen="true" 
+                                                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+                                        </iframe>
+                                    </div>
+                                </div>
 
-                               
-                                <div class="item">
-                                    <div class="text-center" style="font-weight: bold; margin-bottom: 10px; color: #555;">Burimi: Gjimnazi Milot</div>
-                                    <div class="fb-fixed-wrapper">
-                                    <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fgjimnazi.milot&tabs=timeline&width=340&height=600&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false"
-                                                width="350" 
-                                                height="600" 
-                                                style="border:none;overflow:hidden" 
-                                                scrolling="no" 
-                                                frameborder="0" 
-                                                allowfullscreen="true" 
-                                                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
-                                        </iframe>
-                                    </div>
-                                </div>                                   
-                        </div>
+                                <div class="item">
+                                    <div class="text-center" style="font-weight: bold; margin-bottom: 10px; color: #555;">Burimi: Gjimnazi Milot</div>
+                                    <div class="fb-fixed-wrapper">
+                                        <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fgjimnazi.milot&tabs=timeline&width=340&height=600&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false"
+                                                width="350" 
+                                                height="600" 
+                                                style="border:none;overflow:hidden" 
+                                                scrolling="no" 
+                                                frameborder="0" 
+                                                allowfullscreen="true" 
+                                                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+                                        </iframe>
+                                    </div>
+                                </div>                                    
+                            </div>
+                       </div>
                    </div>
-               </div>
-          </div>
- </div>
+              </div>
+        </div>
 
             <div class="row">
                 <div class="col-xs-12">
@@ -448,10 +452,11 @@
                                     <div class="njoftim-date">12 Maj 2026</div> 
                                     <div class="njoftim-content">
                                         <h3>Viti shkollor 2026-2027</h3>
-                                        <p>Sezoni i ri mësimor fillon zyrtarit më 14 shtator 2026 dhe përfundon më 18 qershor 2027.</p>
-                                        <a href="Scanned Document 40.pdf" target="_blank"><span class="tag">Viti Shkollor-shiko më shumë</span></a>
+                                        <p>Sezoni i ri mësimor fillon zyrtarisht më 14 shtator 2026 dhe përfundon më 18 qershor 2027.</p>
+                                        <a href="Scanned Document 40.pdf" target="_blank" rel="noopener noreferrer"><span class="tag">Viti Shkollor-shiko më shumë</span></a>
                                     </div>
                                 </article>
+
                                 <article class="njoftim-card">
                                     <div class="njoftim-date">Korrik 2026</div>
                                     <div class="njoftim-content">
@@ -459,7 +464,7 @@
                                         <p>Informojmë maturantët të cilët nuk janë kalues në provimet e maturës shtetërore ju bëjmë me dije 
                                         se janë shpallur datat e provimeve: (D3) Gjuhë e huaj (Frengjisht)-24 gusht 2026; (D1) Gjuhë shqipe dhe Letërsi-27 gusht 2026;
                                         (D2) Matematikë-31 gusht 2026; (Z1) Provim me zgjedhje-3 shtator 2026. Qendra e provimeve është Gjimnazi "Hydajet Lezha" Lezhë.</p>
-                                        <a href="sesioni2 matura shtetërore.pdf" target="_blank"><span class="tag">Matura-shiko më shumë</span></a>
+                                        <a href="sesioni2 matura shtetërore.pdf" target="_blank" rel="noopener noreferrer"><span class="tag">Matura-shiko më shumë</span></a>
                                     </div>
                                 </article>
 
@@ -471,7 +476,7 @@
                                             Që të aplikoni duhet të merrni vërtetimin e notave nga shkolla me foto, të marrë konfirmimin 
                                             në Zyrën Arsimore Kurbin dhe më pas të dorëzohet në Gjimnazin Milot. Aplikikimi për formularin A1/A1Z bëhet
                                         në portalin e-albania.</p>
-                                        <a href="Formulari A1.jpg" target="_blank"><span class="tag">Matura-shiko më shumë</span></a>
+                                        <a href="Formulari A1.jpg" target="_blank" rel="noopener noreferrer"><span class="tag">Matura-shiko më shumë</span></a>
                                     </div>
                                 </article>
 
@@ -480,7 +485,7 @@
                                     <div class="njoftim-content">
                                         <h3>Pajisja me Laptopë</h3>
                                         <p>Gjimnazi Milot përfiton pajisje teknologjike falë Shkollës së Drejtorëve.</p>
-                                        <a href="https://www.facebook.com/share/p/1GvK9qaRkK/" target="_blank"><span class="tag">Teknologji-shiko më shumë</span></a>
+                                        <a href="https://www.facebook.com/share/p/1GvK9qaRkK/" target="_blank" rel="noopener noreferrer" ontouchstart=""><span class="tag">Teknologji-shiko më shumë</span></a>
                                     </div>
                                 </article>
 
@@ -489,7 +494,7 @@
                                     <div class="njoftim-content">
                                         <h3>Viti shkollor 2026-2027</h3>
                                         <p>Sezoni i ri mësimor fillon zyrtarisht më 14 shtator 2026 dhe përfundon më 18 qershor 2027.</p>
-                                        <a href="Scanned Document 40.pdf" target="_blank"><span class="tag">Viti Shkollor-shiko më shumë</span></a>
+                                        <a href="Scanned Document 40.pdf" target="_blank" rel="noopener noreferrer"><span class="tag">Viti Shkollor-shiko më shumë</span></a>
                                     </div>
                                 </article> 
 
@@ -500,7 +505,7 @@
                                         <p>Informojmë maturantët të cilët nuk janë kalues në provimet e maturës shtetërore ju bëjmë me dije 
                                         se janë shpallur datat e provimeve: (D3) Gjuhë e huaj (Frengjisht)-24 gusht 2026; (D1) Gjuhë shqipe dhe Letërsi-27 gusht 2026;
                                         (D2) Matematikë-31 gusht 2026; (Z1) Provim me zgjedhje-3 shtator 2026. Qendra e provimeve është Gjimnazi "Hydajet Lezha" Lezhë.</p>
-                                        <a href="sesioni2 matura shtetërore.pdf" target="_blank"><span class="tag">Matura-shiko më shumë</span></a>
+                                        <a href="sesioni2 matura shtetërore.pdf" target="_blank" rel="noopener noreferrer"><span class="tag">Matura-shiko më shumë</span></a>
                                     </div>
                                 </article>
 
@@ -532,7 +537,6 @@
                 pause: "hover"
             });
 
-            // Funksioni që ekzekuton ndalimin e saktë prej 8 sekondash
             function ndaloKaroselin8s() {
                 dynamicCarousel.carousel('pause');
                 clearTimeout(pauseTimeout);
@@ -541,23 +545,26 @@
                 }, 8000);
             }
 
-            // Për klikimet rreth e rrotull iframe-it (tek titujt ose hapësirat boshe)
             $('.fb-fixed-wrapper, .item').on('touchstart click', function() {
                 ndaloKaroselin8s();
             });
 
-            // ZGJIDHJA SPECIFIKE PËR CELULAR (Detektimi i klikimit brenda Facebook iframe)
-            // Çdo 300 milisekonda kontrollohet nëse përdoruesi ka fokusuar/prekur iframe-in e Facebook-ut
             setInterval(function() {
                 var aktivi = document.activeElement;
                 if (aktivi && aktivi.tagName === 'IFRAME') {
-                    // Kontrollojmë nëse iframe që ka marrë fokusin ndodhet brenda karoselit tonë
                     if ($(aktivi).closest('#facebookInstitucioneCarousel').length > 0) {
                         ndaloKaroselin8s();
-                        window.focus(); // Kthejmë fokusin tek faqja kryesore që të kapet saktë edhe klikimi tjetër radhës
+                        window.focus();
                     }
                 }
             }, 300);
+
+            // Ndalon animacionin e shiritit kur përdoruesi e prekur me gisht në celular
+            $('.shirit-njoftime-wrapper').on('touchstart', function() {
+                $('.shirit-njoftime-track').css('animation-play-state', 'paused');
+            }).on('touchend', function() {
+                $('.shirit-njoftime-track').css('animation-play-state', 'running');
+            });
         });
     </script>
 
