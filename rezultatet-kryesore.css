@@ -139,7 +139,26 @@ body {
     font-size: 1.1em;
     font-weight: 500;
 }
+.vjeshte-card {
+    background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+    border-color: #f97316;
+    box-shadow: 0 8px 18px rgba(249, 115, 22, 0.12);
+}
 
+.vjeshte-card .card-icon,
+.vjeshte-card .card-arrow {
+    color: #c2410c;
+}
+
+.vjeshte-card:hover {
+    background: linear-gradient(135deg, #f97316 0%, #fb923c 100%);
+    color: #ffffff;
+}
+
+.vjeshte-card:hover .card-description,
+.vjeshte-card:hover .card-arrow {
+    color: #fff7ed;
+}
 /* Responsive Design */
 @media (max-width: 768px) {
     .container-rezultate {
