@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="sq">
 <head>
@@ -420,6 +419,12 @@ Viti mësimor 1987-1988 shënon dhe fillimin e arsimit të mesëm të përgjiths
   let pikaFillestareY = 0;
   let pozicioniFillestarX = 0;
   let pozicioniFillestarY = 0;
+
+  window.addEventListener('pageshow', (event) => {
+    if (event.persisted) {
+      window.location.reload();
+    }
+  });
 
   butoniAI.addEventListener('pointerdown', (event) => {
     poLevizetAI = true;
