@@ -135,7 +135,14 @@
             cursor: grab;
             touch-action: none;
             user-select: none;
+            outline: none;
         }
+
+          .ai-floating-btn:focus,
+          .ai-floating-btn:focus-visible,
+          .ai-floating-btn:active {
+            outline: none;
+          }
 
           .ai-floating-btn.is-dragging {
             cursor: grabbing;
