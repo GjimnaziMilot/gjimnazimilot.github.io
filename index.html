@@ -7,8 +7,7 @@
     <title>Gjimnazi Milot - Faqja Zyrtare</title>
     
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="gjimnazimilot.css">
-    <link href="gjimnazimilot.css" rel="stylesheet">
+    <link rel="stylesheet" href="AI.css">
     
     <style>
         /* Seksioni Hero - Shtrirje totale në të gjithë ekranin */
@@ -113,6 +112,97 @@
         .btn-next {
             right: 15px;
         }
+
+        /* ======================================================== */
+        /* STILI I IKONËS DHE BUTONIT AI (FLOATING WIDGET)           */
+        /* ======================================================== */
+        .ai-floating-btn {
+            position: fixed;
+            bottom: 105px;
+            right: 30px;
+            width: 70px;
+            height: 70px;
+            background: #0b2036;
+            border: 2px solid rgba(219, 249, 255, 0.95);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 0 3px rgba(94, 184, 208, 0.14), 0 5px 18px rgba(0, 0, 0, 0.34), 0 0 22px rgba(94, 184, 208, 0.22);
+            z-index: 9999; /* Siguron që të jetë gjithmonë mbi elementet e tjera */
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            text-decoration: none !important;
+        }
+
+        .ai-floating-btn:hover {
+            transform: scale(1.06);
+            box-shadow: 0 0 0 4px rgba(94, 184, 208, 0.18), 0 7px 22px rgba(22, 59, 89, 0.48), 0 0 28px rgba(139, 216, 232, 0.38);
+        }
+
+        .ai-floating-btn svg {
+            width: 52px;
+            height: 52px;
+          overflow: visible;
+        }
+
+          .galaxy-system {
+            transform-origin: 24px 24px;
+            animation: galaxy-orbit 18s linear infinite;
+          }
+
+          .milky-way-disk {
+            transform-origin: 24px 24px;
+            animation: galaxy-drift 42s linear infinite;
+          }
+
+          .galaxy-system--slow {
+            animation-duration: 28s;
+            animation-direction: reverse;
+          }
+
+          .galaxy-system--fast {
+            animation-duration: 14s;
+          }
+
+          @keyframes galaxy-orbit {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+          }
+
+          @keyframes galaxy-drift {
+            from { transform: rotate(-24deg); }
+            to { transform: rotate(336deg); }
+          }
+
+          @media (prefers-reduced-motion: reduce) {
+            .galaxy-system,
+            .milky-way-disk {
+              animation: none;
+            }
+          }
+
+        .ai-floating-btn::before {
+          content: "Liridona";
+          position: absolute;
+          right: clamp(0px, calc(100vw - 402px), 78px);
+          background-color: #162c45;
+          color: #ffffff;
+          padding: 5px 12px;
+          border: 1px solid rgba(139, 216, 232, 0.7);
+          border-radius: 4px;
+          font-size: 12px;
+          white-space: nowrap;
+          opacity: 0;
+          visibility: hidden;
+          transition: opacity 0.2s ease;
+          pointer-events: none;
+        }
+
+        .ai-floating-btn:hover::before {
+          opacity: 1;
+          visibility: visible;
+        }
+
     </style>
 </head>
 <body>
@@ -190,7 +280,7 @@
     <div class="col-md-8">
       <h2>Historiku i shkollës</h2>
       <p>Viti shkollor 1971-1972 ka hyrë në historinë e kësaj shkolle si një vit tepër i veçantë, sepse për herë të parë u hap Shkolla e Mesme pa shkëputje nga puna, dega Agronomi.
-Në vitin mësimor 1986-1987 u vu në punë ndërtesa e re e shkollës, sot Gjimnazi.  Deri në këtë periudhë funksiononte Shkolla e Mesme e Bashkuar (8-vjeçare +bujqësore 4 vjeçare me/pa shkëputje nga puna).   
+Në vitin mësimor 1986-1987 u vu në punë ndërtesa e re e shkollës, sot Gjimnazi. Deri në këtë periudhë funksiononte Shkolla e Mesme e Bashkuar (8-vjeçare +bujqësore 4 vjeçare me/pa shkëputje nga puna).   
 Viti mësimor 1987-1988 shënon dhe fillimin e arsimit të mesëm të përgjithshëm në Milot.
 </p>
     </div>
@@ -205,6 +295,76 @@ Viti mësimor 1987-1988 shënon dhe fillimin e arsimit të mesëm të përgjiths
     </div>
   </div>
 </div>
+
+<!-- ======================================================== -->
+<!-- IKONA AI FLOATING (E VENDOSUR NË KËNDIN E POSHTËM DJATHTAS) -->
+<!-- ======================================================== -->
+<a href="https://lovable.dev/projects/772e4acc-231b-47bb-811f-f2abd1422360?magic_link=mc_6befbe21-c280-4f7c-ba80-79d83d239975" class="ai-floating-btn" aria-label="Hap Liridonën">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" aria-hidden="true">
+    <defs>
+      <radialGradient id="galaxyAvatarSurface" cx="50%" cy="42%" r="75%">
+        <stop offset="0" stop-color="#51448f"/>
+        <stop offset="0.42" stop-color="#202c68"/>
+        <stop offset="1" stop-color="#07162e"/>
+      </radialGradient>
+      <filter id="galaxyAvatarGlow" x="-40%" y="-40%" width="180%" height="180%">
+        <feGaussianBlur stdDeviation="1.2" result="blur"/>
+        <feMerge>
+          <feMergeNode in="blur"/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
+      <linearGradient id="galaxyOrbit" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#8cecff"/>
+        <stop offset="0.5" stop-color="#ffffff"/>
+        <stop offset="1" stop-color="#c18bff"/>
+      </linearGradient>
+      <radialGradient id="milkyWayCore" cx="50%" cy="50%" r="50%">
+        <stop offset="0" stop-color="#fffde8"/>
+        <stop offset="0.28" stop-color="#e6d5ff"/>
+        <stop offset="0.7" stop-color="#9383d9" stop-opacity="0.65"/>
+        <stop offset="1" stop-color="#5f70bb" stop-opacity="0"/>
+      </radialGradient>
+      <linearGradient id="milkyWayBand" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#7dddf0" stop-opacity="0"/>
+        <stop offset="0.5" stop-color="#f1eaff" stop-opacity="0.92"/>
+        <stop offset="1" stop-color="#a88cff" stop-opacity="0"/>
+      </linearGradient>
+    </defs>
+    <circle cx="24" cy="24" r="22" fill="url(#galaxyAvatarSurface)"/>
+    <circle cx="24" cy="24" r="18.5" fill="none" stroke="#5868aa" stroke-width="1"/>
+    <g opacity="0.9">
+      <circle cx="10.5" cy="15" r="0.55" fill="#ffffff"/>
+      <circle cx="14" cy="32" r="0.42" fill="#c8f5ff"/>
+      <circle cx="19" cy="11.5" r="0.38" fill="#ffffff"/>
+      <circle cx="31.5" cy="11.5" r="0.5" fill="#e1c9ff"/>
+      <circle cx="38" cy="21" r="0.42" fill="#ffffff"/>
+      <circle cx="37" cy="31.5" r="0.6" fill="#c8f5ff"/>
+      <circle cx="28.5" cy="37" r="0.45" fill="#ffffff"/>
+      <circle cx="9.5" cy="26" r="0.35" fill="#e1c9ff"/>
+    </g>
+    <g class="milky-way-disk">
+      <g transform="rotate(24 24 24)">
+      <ellipse cx="24" cy="24" rx="18" ry="7" fill="url(#milkyWayBand)" opacity="0.72"/>
+      <path d="M8 23C13 19 16 18 19 19C23 20 25 22 29 21C33 20 36 18 40 16" fill="none" stroke="#bba9ff" stroke-opacity="0.48" stroke-width="1.1"/>
+      <path d="M8 26C13 29 16 30 19 29C23 28 25 26 29 27C33 28 36 30 40 32" fill="none" stroke="#7fe0ef" stroke-opacity="0.42" stroke-width="1.1"/>
+      <path d="M10 24C15 22 18 21 22 23C26 25 29 25 34 23C36 22 38 21 40 21" fill="none" stroke="#ffffff" stroke-opacity="0.3" stroke-width="0.8"/>
+      </g>
+    </g>
+    <circle cx="24" cy="24" r="8.5" fill="url(#milkyWayCore)" opacity="0.95"/>
+    <g class="galaxy-system galaxy-system--slow">
+      <circle cx="37.5" cy="20" r="1.25" fill="#f5d77d" filter="url(#galaxyAvatarGlow)"/>
+      <circle cx="37.5" cy="20" r="0.35" fill="#ffffff"/>
+    </g>
+    <g class="galaxy-system galaxy-system--fast">
+      <circle cx="13" cy="29" r="0.8" fill="#8cecff"/>
+      <circle cx="13" cy="29" r="0.25" fill="#ffffff"/>
+    </g>
+    <circle cx="24" cy="24" r="2.8" fill="#fff8e5" filter="url(#galaxyAvatarGlow)"/>
+    <circle cx="24" cy="24" r="1.1" fill="#ffffff"/>
+    <path d="M14 13C17 11.5 20 11 23 11" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-width="1.1" opacity="0.26"/>
+  </svg>
+</a>
 
 <footer class="footer-serioz text-center">
   <p>2026 Gjimnazi Milot. Të gjitha të drejtat e rezervuara.</p>
