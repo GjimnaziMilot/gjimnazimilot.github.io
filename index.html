@@ -205,15 +205,25 @@
 
         @media (max-width: 600px) {
           .ai-floating-btn {
-            width: 52px;
-            height: 52px;
+            width: 44px !important;
+            height: 44px !important;
             right: 16px;
             bottom: 80px;
+            padding: 0;
           }
 
           .ai-floating-btn svg {
-            width: 32px;
-            height: 32px;
+            width: 28px !important;
+            height: 28px !important;
+          }
+
+          .ai-floating-btn:active {
+            transform: scale(0.94);
+          }
+
+          .ai-floating-btn .galaxy-system,
+          .ai-floating-btn .milky-way-disk {
+            animation-play-state: running !important;
           }
         }
 
