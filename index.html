@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="sq">
 <head>
@@ -120,8 +121,8 @@
             position: fixed;
             bottom: 105px;
             right: 30px;
-            width: 70px;
-            height: 70px;
+          width: var(--ai-size, 70px);
+          height: var(--ai-size, 70px);
             background: #0b2036;
             border: 2px solid rgba(219, 249, 255, 0.95);
             border-radius: 50%;
@@ -132,7 +133,15 @@
             z-index: 9999; /* Siguron që të jetë gjithmonë mbi elementet e tjera */
             transition: transform 0.2s ease, box-shadow 0.2s ease;
             text-decoration: none !important;
+            cursor: grab;
+            touch-action: none;
+            user-select: none;
         }
+
+          .ai-floating-btn.is-dragging {
+            cursor: grabbing;
+            transition: none;
+          }
 
         .ai-floating-btn:hover {
             transform: scale(1.06);
@@ -205,16 +214,15 @@
 
         @media (max-width: 600px) {
           .ai-floating-btn {
-            width: 44px !important;
-            height: 44px !important;
+            --ai-size: 56px;
             right: 16px;
             bottom: 80px;
             padding: 0;
           }
 
           .ai-floating-btn svg {
-            width: 28px !important;
-            height: 28px !important;
+            width: 34px;
+            height: 34px;
           }
 
           .ai-floating-btn:active {
@@ -323,7 +331,7 @@ Viti mësimor 1987-1988 shënon dhe fillimin e arsimit të mesëm të përgjiths
 <!-- ======================================================== -->
 <!-- IKONA AI FLOATING (E VENDOSUR NË KËNDIN E POSHTËM DJATHTAS) -->
 <!-- ======================================================== -->
-<a href="https://liridona-milot-galaxy.lovable.app/">
+<a class="ai-floating-btn" href="https://liridona-milot-galaxy.lovable.app/" aria-label="Hap asistentin virtual">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" aria-hidden="true">
     <defs>
       <radialGradient id="galaxyAvatarSurface" cx="50%" cy="42%" r="75%">
@@ -404,6 +412,59 @@ Viti mësimor 1987-1988 shënon dhe fillimin e arsimit të mesëm të përgjiths
   const track = document.getElementById('sliderTrack');
   const pikat = document.querySelectorAll('.custom-indicators li');
   let kohezgjatja = 3000;
+
+  const butoniAI = document.querySelector('.ai-floating-btn');
+  let poLevizetAI = false;
+  let uTerhoqAI = false;
+  let pikaFillestareX = 0;
+  let pikaFillestareY = 0;
+  let pozicioniFillestarX = 0;
+  let pozicioniFillestarY = 0;
+
+  butoniAI.addEventListener('pointerdown', (event) => {
+    poLevizetAI = true;
+    uTerhoqAI = false;
+    pikaFillestareX = event.clientX;
+    pikaFillestareY = event.clientY;
+    const drejtkendeshi = butoniAI.getBoundingClientRect();
+    pozicioniFillestarX = drejtkendeshi.left;
+    pozicioniFillestarY = drejtkendeshi.top;
+    butoniAI.classList.add('is-dragging');
+    butoniAI.setPointerCapture(event.pointerId);
+  });
+
+  butoniAI.addEventListener('pointermove', (event) => {
+    if (!poLevizetAI) return;
+
+    const ndryshimiX = event.clientX - pikaFillestareX;
+    const ndryshimiY = event.clientY - pikaFillestareY;
+    if (Math.abs(ndryshimiX) > 4 || Math.abs(ndryshimiY) > 4) {
+      uTerhoqAI = true;
+    }
+    if (!uTerhoqAI) return;
+
+    const kufiriX = window.innerWidth - butoniAI.offsetWidth;
+    const kufiriY = window.innerHeight - butoniAI.offsetHeight;
+    const pozicioniX = Math.max(0, Math.min(pozicioniFillestarX + ndryshimiX, kufiriX));
+    const pozicioniY = Math.max(0, Math.min(pozicioniFillestarY + ndryshimiY, kufiriY));
+    butoniAI.style.left = `${pozicioniX}px`;
+    butoniAI.style.top = `${pozicioniY}px`;
+    butoniAI.style.right = 'auto';
+    butoniAI.style.bottom = 'auto';
+  });
+
+  butoniAI.addEventListener('pointerup', (event) => {
+    poLevizetAI = false;
+    butoniAI.classList.remove('is-dragging');
+    butoniAI.releasePointerCapture(event.pointerId);
+  });
+
+  butoniAI.addEventListener('click', (event) => {
+    if (uTerhoqAI) {
+      event.preventDefault();
+      uTerhoqAI = false;
+    }
+  });
 
   function rrethekoKaruselin() {
     track.style.transform = `translateX(-${indeksiAktual * 12.5}%)`;
